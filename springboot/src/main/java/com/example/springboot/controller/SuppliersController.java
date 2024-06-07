@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Optional;
 
 
-
 @RestController
 public class SuppliersController {
 
@@ -39,7 +38,7 @@ public class SuppliersController {
         Optional<SuppliersModel> suppliersO = suppliersRepository.findById(id);
 
         if(suppliersO.isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Fornecedor não encontrado.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Supplier not founded.");
         }
         return ResponseEntity.status(HttpStatus.OK).body(suppliersO.get());
     }
@@ -50,7 +49,7 @@ public class SuppliersController {
         Optional<SuppliersModel> suppliersO = suppliersRepository.findById(id);
 
         if(suppliersO.isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Fornecedor não encontrado.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Supplier not founded.");
         }
 
         var suppliersModel = suppliersO.get();
@@ -64,11 +63,11 @@ public class SuppliersController {
         Optional<SuppliersModel> suppliersO = suppliersRepository.findById(id);
 
         if(suppliersO.isEmpty()){
-           return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Fornecedor não encontrado.");
+           return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Supplier not founded.");
         }
 
         suppliersRepository.delete(suppliersO.get());
-        return ResponseEntity.status(HttpStatus.OK).body("Fornecedor deletado com sucesso.");
+        return ResponseEntity.status(HttpStatus.OK).body("Supplier deleted successfully.");
    }
 
 
