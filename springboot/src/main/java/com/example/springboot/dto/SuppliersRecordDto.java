@@ -10,9 +10,7 @@ public record SuppliersRecordDto(
         @NotBlank String cnpj,
         @NotBlank String endereco,
         @NotBlank String telefone,
-        @NotBlank String email,
-        LocalDateTime dataCriacao,
-        LocalDateTime dataAtualizacao
+        @NotBlank String email
 ) {
 
 

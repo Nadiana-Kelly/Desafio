@@ -6,6 +6,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Column;
 import jakarta.persistence.Table;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -33,10 +35,10 @@ public class SuppliersModel implements Serializable {
     @Column(length = 255)
     private String email;
 
-    @Column(name = "data_criacao", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Column(name = "data_criacao")
     private LocalDateTime dataCriacao;
 
-    @Column(name = "data_atualizacao", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Column(name = "data_atualizacao")
     private LocalDateTime dataAtualizacao;
 
 
@@ -92,15 +94,18 @@ public class SuppliersModel implements Serializable {
         return dataCriacao;
     }
 
-    public void setDataCriacao(LocalDateTime dataCriacao) {
-        this.dataCriacao = dataCriacao;
-    }
-
     public LocalDateTime getDataAtualizacao() {
         return dataAtualizacao;
     }
 
-    public void setDataAtualizacao(LocalDateTime dataAtualizacao) {
-        this.dataAtualizacao = dataAtualizacao;
+    @PrePersist
+    public void prePersist() {
+        dataCriacao = LocalDateTime.now();
+        dataAtualizacao = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        dataAtualizacao = LocalDateTime.now();
     }
 }

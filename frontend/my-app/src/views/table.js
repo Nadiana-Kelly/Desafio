@@ -1,6 +1,18 @@
-function Table(props) {
-    const {suppliers} = props;
+import { useState, useEffect } from "react";
+import api from '../services/api'
 
+function Table() {
+    const [suppliers, setSuppliers] = useState([]);
+
+    useEffect(() => {
+      async function loadSuppliers() {
+        const response = await api.get('/suppliers');
+        setSuppliers(response.data);
+      }
+  
+      loadSuppliers();
+    }, []);
+  
     let lista = suppliers.map((e, index) => {
         return (
             <tr key={index}>
@@ -26,7 +38,7 @@ function Table(props) {
                         <th scope="col">Telefone</th>
                         <th scope="col">E-mail</th>
                         <th scope="col">Data de Criação</th>
-                        <th scope="col">data de Atualização</th>
+                        <th scope="col">Data de Atualização</th>
                     </tr>
                 </thead>
                 <tbody>
