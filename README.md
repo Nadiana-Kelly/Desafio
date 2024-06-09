@@ -6,7 +6,7 @@ Este projeto é um módulo de cadastro de fornecedores. O módulo inclui um back
 - Listar fornecedores cadastrados
 - Editar, visualizar e excluir fornecedores cadastrados
 
-### 🛠 Tecnologias Utilizadas:
+### 🛠 Tecnologias Utilizadas
 - Back-end: Spring Boot
 - Front-end: React
 - Banco de Dados: PostgresSQL
