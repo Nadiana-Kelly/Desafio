@@ -13,26 +13,22 @@ Este projeto é um módulo de cadastro de fornecedores. O módulo inclui um back
 
 ### ▶️ Executando o back-end
 - Pré-requisitos
-  - Java 11 ou superior
-  - Node.js e npm (ou yarn)
-  - Maven
+  - Java 17 
+  - Node.js e npm 
 
 - Executando back-end:
 
-  ``git clone <url-do-repositorio> cd <nome-do-repositorio>``
-  <br>
-  ``cd backend``
-  <br>
-  ``mvn spring-boot:run``
-
+  ``git clone https://github.com/Nadiana-Kelly/Desafio.git``
+  - Utilize alguma IDE como IntelliJ ou Eclipse    
 - Executando front-end:
   
   ``cd frontend``
   <br>
+  ``cd my-app``
+  <br>
   ``npm install``
   <br>
   ``npm start``
-
+  
 ### 💻 Acessando o sistema:
-  - O back-end estará disponível em `http://localhost:8080`
-  - O front-end estará disponível em `http://localhost:3000`
+  ``http://3.18.213.92:3000``
