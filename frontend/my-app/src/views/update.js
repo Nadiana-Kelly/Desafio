@@ -1,28 +1,55 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Flex, Form, Input, Card, Alert } from 'antd';
-import { useNavigate  } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import api from '../services/api';
 
-function CreateView() {
+export default function UpdateView() {
     const navigate = useNavigate();
-    const [error, setError] = useState(false);
+    const [error, setError] = useState([false, '']);
+    const [form] = Form.useForm();
 
-    const createSupplier = async (values) => {
+    // get id from url react
+    let { id } = useParams();
+
+    useEffect(() => {
+        function getSupplier() {
+            async function loadSupplier() {
+                try {
+                    const response = await api.get(`/suppliers/${id}`);
+                    form.setFieldsValue({
+                        nome: response.data.nome,
+                        cnpj: response.data.cnpj,
+                        endereco: response.data.endereco,
+                        telefone: response.data.telefone,
+                        email: response.data.email,
+                    });
+                } catch(error) {
+                    setError([true, "O fornecedor não foi encontrado!"]);
+                }
+            }
+
+            loadSupplier();
+        }
+
+        getSupplier();
+    }, [])
+
+    const updateSupplier = async (values) => {
         try {
-            await api.post('/suppliers', values);
+            await api.put('/suppliers/' + id, values);
             navigate('/list');
         } catch(error) {
-            setError(true);
+            setError([true, "Um erro ocorreu ao tentar atualizar o fornecedor!"]);
         }
     }
 
     return (
         <div style={{height: '100%'}}>
             {
-                error &&
+                error[0] &&
                 <Alert
                     message="Error"
-                    description="Um erro ocorreu ao tentar cadastrar o fornecedor!"
+                    description={error[1]}
                     type="error"
                     closable
                     showIcon
@@ -31,12 +58,13 @@ function CreateView() {
 
             <Flex justify="center" align="center" vertical style={{height: '100%'}}>
                 <Card
-                    title="Cadastrar Fornecedor"
+                    title="Atualizar Fornecedor"
                     style={{
                         width: 500,
                     }}
                 >
                     <Form
+                        form={form}
                         labelCol={{
                             span: 4,
                         }}
@@ -51,7 +79,7 @@ function CreateView() {
                             remember: true,
                         }}
 
-                        onFinish={createSupplier}
+                        onFinish={updateSupplier}
 
                         autoComplete="off"
                     >
@@ -123,7 +151,7 @@ function CreateView() {
                             }}
                         >   
                             <Button type="primary" htmlType="submit">
-                                Cadastrar
+                                Atualizar
                             </Button>
                         </Form.Item>
                     </Form>
@@ -132,5 +160,3 @@ function CreateView() {
         </div>
     )
 }
-
-export default CreateView;
