@@ -10,4 +10,6 @@ import java.util.UUID;
 @Repository
 public interface SuppliersRepository extends JpaRepository<SuppliersModel, UUID>{
     Optional<SuppliersModel> findById(Integer id);
+
+    Optional<SuppliersModel> findByCnpj(String cnpj);
 }
